@@ -22,6 +22,7 @@ public class DepartmentDAO {
     private static final Logger logger = LogManager.getLogger("FileAppender");
     private static final String SUCCESS_MSG = "\nSuccessfully Created Records In The Database!\n";
     private static final String ROLLBACK_MSG = "\nTransaction Is Being Rolled Back\n";
+    private static final String COULD_NOT_PERF_MSG = "Could not perform operation - we'll figure out what happened";
     private static final Integer DEPARTMENT_COUNT = 5;
     private static Session SESSION;
 
@@ -45,6 +46,7 @@ public class DepartmentDAO {
                 logger.warn(ROLLBACK_MSG);
                 SESSION.getTransaction().rollback();
             }
+            System.out.println(COULD_NOT_PERF_MSG);
         } finally {
             if (SESSION != null) {
                 SESSION.close();
@@ -62,7 +64,7 @@ public class DepartmentDAO {
         Root<Department> root = query.from(Department.class);
         query.select(root).where(builder.equal(root.get("departmentName"), departmentName));
         Query<Department> q = SESSION.createQuery(query);
-        Department department = null;
+        Department department;
         try {
             department = q.getSingleResult();
         } catch (NoResultException e) {
@@ -76,6 +78,7 @@ public class DepartmentDAO {
                 logger.warn(ROLLBACK_MSG);
                 SESSION.getTransaction().rollback();
             }
+            System.out.println(COULD_NOT_PERF_MSG);
         } finally {
             if (SESSION != null) {
                 SESSION.close();
@@ -111,6 +114,7 @@ public class DepartmentDAO {
                 logger.warn(ROLLBACK_MSG);
                 SESSION.getTransaction().rollback();
             }
+            System.out.println(COULD_NOT_PERF_MSG);
         } finally {
             if (SESSION != null) {
                 SESSION.close();
@@ -131,11 +135,13 @@ public class DepartmentDAO {
         System.out.println("Assistants - " + countAssistant);
         System.out.println("Professors - " + countProfessor);
         System.out.println("Assosiate professors -  " + countAssosiateProfessor);
+
         } catch (Exception sqlException) {
             if (null != SESSION.getTransaction()) {
                 logger.warn(ROLLBACK_MSG);
                 SESSION.getTransaction().rollback();
             }
+            System.out.println(COULD_NOT_PERF_MSG);
         } finally {
             if (SESSION != null) {
                 SESSION.close();
@@ -164,6 +170,7 @@ public class DepartmentDAO {
                 logger.warn(ROLLBACK_MSG);
                 SESSION.getTransaction().rollback();
             }
+            System.out.println(COULD_NOT_PERF_MSG);
         } finally {
             if (SESSION != null) {
                 SESSION.close();

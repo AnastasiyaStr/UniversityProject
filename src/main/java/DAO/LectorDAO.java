@@ -3,6 +3,8 @@ package DAO;
 import entity.Degree;
 import entity.Department;
 import entity.Lector;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -15,8 +17,11 @@ import java.util.Random;
 import java.util.Set;
 
 public class LectorDAO {
+    private static final Logger logger = LogManager.getLogger("FileAppender");
     private static final String SUCCESS_MSG = "\nSuccessfully Created Records In The Database!\n";
     private static final String ROLLBACK_MSG = "\nTransaction Is Being Rolled Back\n";
+    private static final String COULD_NOT_PERF_MSG = "Could not perform operation - we'll figure out what happened";
+
     private static final Double SALARY = 100.111;
     private static final Integer LECTORS_COUNT = 5;
     private static Session SESSION;
@@ -39,13 +44,14 @@ public class LectorDAO {
                 SESSION.save(lector);
             }
             SESSION.getTransaction().commit();
-            System.out.println(SUCCESS_MSG);
+           logger.info(SUCCESS_MSG);
         } catch (Exception sqlException) {
             if (null != SESSION.getTransaction()) {
-                System.out.println(ROLLBACK_MSG);
+               logger.warn(ROLLBACK_MSG);
                 SESSION.getTransaction().rollback();
             }
-            sqlException.printStackTrace();
+            System.out.println(COULD_NOT_PERF_MSG);
+
         } finally {
             if (SESSION != null) {
                 SESSION.close();
@@ -69,13 +75,13 @@ public class LectorDAO {
                 System.out.println("No data found!");
             }
             SESSION.getTransaction().commit();
-            System.out.println(SUCCESS_MSG);
+           logger.info(SUCCESS_MSG);
         } catch (Exception sqlException) {
             if (null != SESSION.getTransaction()) {
-                System.out.println(ROLLBACK_MSG);
+                logger.warn(ROLLBACK_MSG);
                 SESSION.getTransaction().rollback();
             }
-            sqlException.printStackTrace();
+            System.out.println(COULD_NOT_PERF_MSG);
         } finally {
             if (SESSION != null) {
                 SESSION.close();

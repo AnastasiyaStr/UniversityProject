@@ -1,18 +1,22 @@
 package DAO;
 
 import entity.University;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
 /**
  * class to access info about university in database
  */
 public class UniversityDAO {
+    private static final Logger logger = LogManager.getLogger("FileAppender");
     private static final String SUCCESS_MSG = "\nSuccessfully Created Records In The Database!\n";
     private static final String ROLLBACK_MSG = "\nTransaction Is Being Rolled Back\n";
+    private static final String COULD_NOT_PERF_MSG = "Could not perform operation - we'll figure out what happened";
     private static Session SESSION;
 
     public static void createRecord() {
-        University university = null;
+        University university;
         try {
             SESSION = HibernateUtil.getSessionFactory().openSession();
             SESSION.beginTransaction();
@@ -20,13 +24,14 @@ public class UniversityDAO {
             university.setUniversityName("Hogwarts");
             SESSION.save(university);
             SESSION.getTransaction().commit();
-            System.out.println(SUCCESS_MSG);
+           logger.info(SUCCESS_MSG);
         } catch (Exception sqlException) {
             if (null != SESSION.getTransaction()) {
-                System.out.println(ROLLBACK_MSG);
+               logger.warn(ROLLBACK_MSG);
                 SESSION.getTransaction().rollback();
             }
-            sqlException.printStackTrace();
+            System.out.println(COULD_NOT_PERF_MSG);
+
         } finally {
             if (SESSION != null) {
                 SESSION.close();
