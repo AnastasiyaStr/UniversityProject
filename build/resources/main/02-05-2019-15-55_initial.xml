@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="Hanuliak">
+        <insert tableName="lector">
+            <column name="id" value="20004"/>
+            <column name="first_name" value="Vasya Pupkin"/>
+
+
+        </insert>
+    </changeSet>
+
+
+
+    <!--<changeSet author="Oleksandr (generated)" id="1556801349747-1">-->
+        <!--<createTable tableName="lector">-->
+            <!--<column autoIncrement="true" name="id" type="INT">-->
+                <!--<constraints primaryKey="true"/>-->
+            <!--</column>-->
+            <!--<column name="first_name" type="VARCHAR(45)">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="last_name" type="VARCHAR(45)">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="degree" type="VARCHAR(45)">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
+
+    <!--<changeSet author="Oleksandr (generated)" id="1556801349747-2">-->
+        <!--<createTable tableName="university">-->
+            <!--<column autoIncrement="true" name="id" type="INT">-->
+                <!--<constraints primaryKey="true"/>-->
+            <!--</column>-->
+            <!--<column name="university_name" type="VARCHAR(45)">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="Oleksandr (generated)" id="1556801349747-3">-->
+        <!--<createTable tableName="department">-->
+            <!--<column name="id" type="INT">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="department_name" type="VARCHAR(90)">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+        <!--</createTable>-->
+    <!--</changeSet>-->
+    <!--&lt;!&ndash;<changeSet id="2" author="Oleksandr">&ndash;&gt;-->
+        <!--&lt;!&ndash;<addForeignKeyConstraint baseTableName="department"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;baseColumnNames="lector_id"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;constraintName="lector_department"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;referencedTableName="lector"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;referencedColumnNames="id"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;onUpdate="CASCADE"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;onDelete="CASCADE"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</changeSet>&ndash;&gt;-->
+    <!--&lt;!&ndash;<changeSet id="2" author="Oleksandr">&ndash;&gt;-->
+        <!--&lt;!&ndash;<addForeignKeyConstraint baseTableName="university"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;baseColumnNames="separtment_id"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;constraintName="lector_department"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;referencedTableName="lector"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;referencedColumnNames="id"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;onUpdate="CASCADE"&ndash;&gt;-->
+                                 <!--&lt;!&ndash;onDelete="CASCADE"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</changeSet>&ndash;&gt;-->
+
+</databaseChangeLog>
